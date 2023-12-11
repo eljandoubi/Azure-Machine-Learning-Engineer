@@ -1,5 +1,3 @@
-data : https://drive.google.com/drive/folders/1uDiRMNghQuHiMDYYOx11Yx4hSfV6toI0?usp=drive_link
-code : https://drive.google.com/drive/folders/1Iqh8VqNhQgGywHBHjYE64hhdAHc9Y6Wg?usp=drive_link
 
 *NOTE:* This file is a template that you can use to create the README for your project. The *TODO* comments below will highlight the information you should be sure to include.
 
