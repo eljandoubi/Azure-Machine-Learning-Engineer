@@ -15,7 +15,7 @@ seed=42
 def get_data():
     """download, clean and split the data"""
     
-    url="https://raw.githubusercontent.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/main/data/WA_Fn-UseC_-HR-Employee-Attrition.csv"
+    url="https://raw.githubusercontent.com/eljandoubi/Azure-Machine-Learning-Engineer/main/attrition-dataset.csv"
     data=TabularDatasetFactory.from_delimited_files(path=url)
     
     x_df = data.to_pandas_dataframe().dropna()
