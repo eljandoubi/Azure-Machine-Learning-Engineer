@@ -18,7 +18,7 @@ More information about the dataset can be found [here](https://www.kaggle.com/pa
 This is a binary classification problem predicting 'Attrition' as either 'true' or 'false'. `Hyperdrive` and `AutoML` were used to train models based on the `AUC Weighted` metric. The best-performing model was deployed and interacted with.
 
 ### Access
-The data is hosted [here](https://raw.githubusercontent.com/eljandoubi/Azure-Machine-Learning-Engineer/main/attrition-dataset.csv). The `Tabular Dataset Factory's Dataset.Tabular.from_delimited_files()` operation was used to import and save it to the datastore by using `dataset.register()`.
+The data is hosted [here](https://raw.githubusercontent.com/eljandoubi/Azure-Machine-Learning-Engineer/main/attrition-dataset.csv). The Tabular Dataset Factory's `Dataset.Tabular.from_delimited_files()` operation was used to import and save it to the datastore by using `dataset.register()`.
 
 ## Automated ML
 Automated machine learning selects algorithms and hyperparameters, generating a deployable model. Configuration details are as follows:
