@@ -1,65 +1,111 @@
+# Capstone Project Udacity Machine Learning Engineer Nanodegree
 
-# Azure Machine Learning Engineer
+This repository contains files related to the Capstone Project for Udacity's Machine Learning Nanodegree with Microsoft Azure.
 
-*TODO:* Write a short introduction to your project.
+In this project, two experiments were conducted: one using Microsoft Azure Machine Learning [Hyperdrive package](https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive?view=azure-ml-py), and another using Microsoft Azure [Automated Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-configure-auto-train?view=azure-ml-py) (referred to as AutoML) with the [Azure Python SDK](https://docs.microsoft.com/en-us/python/api/overview/azure/ml/?view=azure-ml-py).
 
-## Project Set Up and Installation
-This undertaking serves as the culmination project for the "Machine Learning Engineer for Microsoft Azure" Udacity Nanodegree. The primary objective involves selecting a publicly available external dataset, which will then be employed to train a model using both Automated ML and Hyperdrive methodologies. Subsequently, a comparative analysis of the performance between these two algorithms will be conducted, and the superior model will be deployed. The resulting endpoint will be utilized to extract predictive insights through inquiries.
+The best models from both experiments were compared based on the primary metric (AUC weighted score), and the best performing model was deployed and consumed using a web service.
+
+## Project Workflow
+![Project Workflow](pics/capstone-diagram.png)
 
 ## Dataset
+The project utilized the [IBM HR Analytics Employee Attrition & Performance Dataset](https://www.kaggle.com/pavansubhasht/ibm-hr-analytics-attrition-dataset), aiming to predict employee attrition and understand the contributing factors.
 
-### Overview
-
-The dataset utilized for this project is [heart_failure_clinical_records_dataset.csv](https://www.kaggle.com/andrewmvd/heart-failure-clinical-data). It provides information on various health indicators recorded from patients, comprising nearly 300 rows of data.
+More information about the dataset can be found [here](https://www.kaggle.com/pavansubhasht/ibm-hr-analytics-attrition-dataset).
 
 ### Task
-
-The primary task involves predicting the `DEATH_EVENT`—indicating whether or not a patient deceased during the follow-up period (boolean). The dataset features include:
-
-- `age`: The age of the patient.
-- `anaemia`: Decrease of red blood cells or hemoglobin (boolean).
-- `creatinine_phosphokinase`: Level of creatinine phosphokinase in the blood (mcg/L).
-- `diabetes`: If the patient has diabetes (boolean).
-- `ejection_fraction`: Percentage of blood leaving the heart at each contraction (percentage).
-- `high_blood_pressure`: If the patient has hypertension (boolean).
-- `platelets`: Platelets in the blood (kiloplatelets/mL).
-- `serum_creatinine`: Level of serum creatinine in the blood (mg/dL).
-- `serum_sodium`: Level of serum sodium in the blood (mEq/L).
-- `sex`: Woman or man (binary).
-- `smoking`: If the patient smokes or not (boolean).
-- `time`: Follow-up period (days).
-- `DEATH_EVENT`: If the patient deceased during the follow-up period (boolean).
+This is a binary classification problem predicting 'Attrition' as either 'true' or 'false'. `Hyperdrive` and `AutoML` were used to train models based on the `AUC Weighted` metric. The best-performing model was deployed and interacted with.
 
 ### Access
-
-The dataset was uploaded to the Azure ML studio from a local file, which is also available in this GitHub repository as [heart_failure_clinical_records_dataset.csv](heart_failure_clinical_records_dataset.csv). Both the `automl.ipynb` and `hyperparameter_tuning.ipynb` notebooks contain code that checks whether the .csv file has been uploaded; if not, the code retrieves the dataset from this repository.
-
+The data is hosted [here](https://raw.githubusercontent.com/eljandoubi/Azure-Machine-Learning-Engineer/main/attrition-dataset.csv). The `Tabular Dataset Factory's Dataset.Tabular.from_delimited_files()` operation was used to import and save it to the datastore by using `dataset.register()`.
 
 ## Automated ML
-*TODO*: Give an overview of the `automl` settings and configuration you used for this experiment
+Automated machine learning selects algorithms and hyperparameters, generating a deployable model. Configuration details are as follows:
+
+| Auto ML Configuration | Value | Explanation |
+|:---:|:---:|:---:|
+| experiment_timeout_minutes | 30 | Maximum duration in minutes before termination |
+| max_concurrent_iterations | 8 | Maximum concurrent iterations |
+| primary_metric | AUC_weighted | Metric for model optimization |
+| compute_target | cpu_cluster(created) | Compute target for the experiment |
+| task | classification | Nature of the machine learning task |
+| training_data | dataset(imported) | Training data used in the experiment |
+| label_column_name | Attrition | Label column name |
+| path | ./automl | Project folder path |
+| enable_early_stopping | True | Enable early termination |
+| featurization | auto | Automatic featurization |
+| debug_log | automl_errors.log | Debug log file |
+
+![AutoML Config](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/auto%20ml%20config.PNG)
 
 ### Results
-*TODO*: What are the results you got with your automated ML model? What were the parameters of the model? How could you have improved it?
+The best model, `VotingEnsemble`, achieved an AUC_weighted of **0.823**.
 
-*TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+**Run Details**
+![AutoML Run Details](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/automl%20run%20details.PNG)
+
+**Best Model**
+![AutoML Best Model](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/automl%20best%20model.PNG)
+![AutoML Best Run](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/auto%20ml%20best%20run.PNG)
+
+### Improve AutoML Results
+* Increase experiment timeout duration
+* Try a different primary metric
+* Engineer new features
+* Explore other AutoML configurations
 
 ## Hyperparameter Tuning
-*TODO*: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
+A Decision Tree model was used for its simplicity and interpretability. HyperDrive configuration details:
 
+| Configuration | Value | Explanation |
+|:---:|:---:|:---:|
+| hyperparameter_sampling | Value | Explanation |
+| policy | early_termination_policy | Early termination policy |
+| primary_metric_name | AUC_weighted | Primary metric for evaluation |
+| primary_metric_goal | PrimaryMetricGoal.MAXIMIZE | Maximize primary metric |
+| max_total_runs | 8 | Maximum number of runs |
+| max_concurrent_runs | 4 | Maximum concurrent runs |
+| estimator | SKLearn | Estimator with sampled hyperparameters |
 
-### Results
-*TODO*: What are the results you got with your model? What were the parameters of the model? How could you have improved it?
+Hyperparameters for the Decision Tree:
 
-*TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+| Hyperparameter | Value | Explanation |
+|:---:|:---:|:---:|
+| criterion | choice("gini", "entropy") | Function to measure split quality |
+| bootstrap | choice(True, False) | Use of bootstrap samples |
+| max_depth | randint(10) | Maximum depth of the tree |
+
+### HyperDrive Results
+The best model had Parameter Values as `criterion` = **gini**, `max_depth` = **8**, `bootstrap` = **True**. The AUC_weighted of the Best Run is **0.80**.
+
+![Best HyperDrive Model](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/best%20hyperdrive%20model.PNG)
+![HyperDrive Runs](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/hyperdrive%20runs.PNG)
+
+**Run Details**
+![HyperDrive Run Details](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/hyperdrive%20run%20completed.PNG)
+
+**Visualization of Runs**
+![HyperDrive Output](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/hyperdrive%20output.PNG)
+
+### Improve HyperDrive Results
+* Choose a different algorithm
+* Choose a different classification metric
+* Choose a different termination policy
+* Specify a different sampling method
 
 ## Model Deployment
-*TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
+The AutoML model outperforms the HyperDrive model, so it will be deployed as a web service. The workflow for deploying a model in Azure ML Studio is as follows:
+
+* **Register the model**
+* **Prepare an inference configuration**
+* **Prepare an entry script**
+* **Choose a compute target**
+* **Deploy the model to the compute target**
+* **Test the resulting web service**
+
+**Healthy Deployed State**
+![AutoML Webservice](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/automl%20webservice.PNG)
 
 ## Screen Recording
-*TODO* Provide a link to a screen recording of the project in action. Remember that the screencast should demonstrate:
-- A working model
-- Demo of the deployed  model
-- Demo of a sample request sent to the endpoint and its response
-
-## Standout Suggestions
-*TODO (Optional):* This is where you can provide information about any standout suggestions that you have attempted.
+An overview of this project can be found [here](https://youtu.be).
