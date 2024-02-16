@@ -1,23 +1,39 @@
 
-*NOTE:* This file is a template that you can use to create the README for your project. The *TODO* comments below will highlight the information you should be sure to include.
-
-# Your Project Title Here
+# Azure Machine Learning Engineer
 
 *TODO:* Write a short introduction to your project.
 
 ## Project Set Up and Installation
-*OPTIONAL:* If your project has any special installation steps, this is where you should put it. To turn this project into a professional portfolio project, you are encouraged to explain how to set up this project in AzureML.
+This undertaking serves as the culmination project for the "Machine Learning Engineer for Microsoft Azure" Udacity Nanodegree. The primary objective involves selecting a publicly available external dataset, which will then be employed to train a model using both Automated ML and Hyperdrive methodologies. Subsequently, a comparative analysis of the performance between these two algorithms will be conducted, and the superior model will be deployed. The resulting endpoint will be utilized to extract predictive insights through inquiries.
 
 ## Dataset
 
 ### Overview
-*TODO*: Explain about the data you are using and where you got it from.
+
+The dataset utilized for this project is [heart_failure_clinical_records_dataset.csv](https://www.kaggle.com/andrewmvd/heart-failure-clinical-data). It provides information on various health indicators recorded from patients, comprising nearly 300 rows of data.
 
 ### Task
-*TODO*: Explain the task you are going to be solving with this dataset and the features you will be using for it.
+
+The primary task involves predicting the `DEATH_EVENT`—indicating whether or not a patient deceased during the follow-up period (boolean). The dataset features include:
+
+- `age`: The age of the patient.
+- `anaemia`: Decrease of red blood cells or hemoglobin (boolean).
+- `creatinine_phosphokinase`: Level of creatinine phosphokinase in the blood (mcg/L).
+- `diabetes`: If the patient has diabetes (boolean).
+- `ejection_fraction`: Percentage of blood leaving the heart at each contraction (percentage).
+- `high_blood_pressure`: If the patient has hypertension (boolean).
+- `platelets`: Platelets in the blood (kiloplatelets/mL).
+- `serum_creatinine`: Level of serum creatinine in the blood (mg/dL).
+- `serum_sodium`: Level of serum sodium in the blood (mEq/L).
+- `sex`: Woman or man (binary).
+- `smoking`: If the patient smokes or not (boolean).
+- `time`: Follow-up period (days).
+- `DEATH_EVENT`: If the patient deceased during the follow-up period (boolean).
 
 ### Access
-*TODO*: Explain how you are accessing the data in your workspace.
+
+The dataset was uploaded to the Azure ML studio from a local file, which is also available in this GitHub repository as [heart_failure_clinical_records_dataset.csv](heart_failure_clinical_records_dataset.csv). Both the `automl.ipynb` and `hyperparameter_tuning.ipynb` notebooks contain code that checks whether the .csv file has been uploaded; if not, the code retrieves the dataset from this repository.
+
 
 ## Automated ML
 *TODO*: Give an overview of the `automl` settings and configuration you used for this experiment
