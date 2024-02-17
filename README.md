@@ -109,4 +109,4 @@ The AutoML model outperforms the HyperDrive model, so it will be deployed as a w
 ![AutoML Webservice ins](pics/deploy_ins.png)
 
 ## Screen Recording
-An overview of this project can be found [here](https://youtu.be).
+An overview of this project can be found [here](https://youtu.be/nRRIczcHjpM).  
