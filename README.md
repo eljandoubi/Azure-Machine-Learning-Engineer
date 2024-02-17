@@ -77,16 +77,17 @@ Hyperparameters for the Decision Tree:
 | max_depth | randint(10) | Maximum depth of the tree |
 
 ### HyperDrive Results
-The best model had Parameter Values as `criterion` = **gini**, `max_depth` = **8**, `bootstrap` = **True**. The AUC_weighted of the Best Run is **0.80**.
+The best model had Parameter Values as `criterion` = **gini**, `max_depth` = **8**, `bootstrap` = **False**. The AUC_weighted of the Best Run is **0.744**.
 
-![Best HyperDrive Model](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/best%20hyperdrive%20model.PNG)
-![HyperDrive Runs](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/hyperdrive%20runs.PNG)
+![Best HyperDrive Model](pics/hyperdrive_best_model.png)
 
 **Run Details**
-![HyperDrive Run Details](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/hyperdrive%20run%20completed.PNG)
+![HyperDrive Run Completed](pics/hyperdrive_run_completed.png)
+![HyperDrive Run Details](pics/hyperdrive_run_details.png)
+![HyperDrive Run Table](pics/hyperdrive_run_table.png)
 
 **Visualization of Runs**
-![HyperDrive Output](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/hyperdrive%20output.PNG)
+![HyperDrive Output](pics/hyperdrive_visu.png)
 
 ### Improve HyperDrive Results
 * Choose a different algorithm
