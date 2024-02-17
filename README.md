@@ -66,7 +66,7 @@ A Decision Tree model was used for its simplicity and interpretability. HyperDri
 | primary_metric_goal | PrimaryMetricGoal.MAXIMIZE | Maximize primary metric |
 | max_total_runs | 8 | Maximum number of runs |
 | max_concurrent_runs | 4 | Maximum concurrent runs |
-| estimator | SKLearn | Estimator with sampled hyperparameters |
+| run_config | ScriptRunConfig | configuration to run th script |
 
 Hyperparameters for the Decision Tree:
 

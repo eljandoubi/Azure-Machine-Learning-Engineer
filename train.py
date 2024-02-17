@@ -1,11 +1,10 @@
-from sklearn.tree import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
 import argparse
 import os
 import joblib
 from sklearn.model_selection import train_test_split
 import pandas as pd
 from azureml.core.run import Run
-from azureml.data.dataset_factory import TabularDatasetFactory
 from sklearn.metrics import roc_auc_score
 
 
@@ -15,13 +14,11 @@ seed=42
 def get_data():
     """download, clean and split the data"""
     
-    url="https://raw.githubusercontent.com/eljandoubi/Azure-Machine-Learning-Engineer/main/attrition-dataset.csv"
-    data=TabularDatasetFactory.from_delimited_files(path=url)
     
-    x_df = data.to_pandas_dataframe().dropna()
+    x_df = pd.read_csv("attrition-dataset.csv")
+    y_df = x_df.pop("Attrition")
     x_df = x_df.drop(['EmployeeCount', 'Over18', 'StandardHours'], axis = 1) 
     x_df = pd.get_dummies(x_df, drop_first=True)
-    y_df = x_df.pop("Attrition")
     
     return train_test_split(x_df,y_df,test_size=0.2, random_state=seed)
 
@@ -59,7 +56,7 @@ if __name__ == '__main__':
                         choices=["gini","entropy"]
                         )
                         
-    parser.add_argument('--bootstrap', type=bool, default=True, 
+    parser.add_argument('--bootstrap', type=str, default="True", 
                         help="Whether bootstrap samples are used when building trees.",
                         )
     
@@ -70,6 +67,12 @@ if __name__ == '__main__':
     
     if amgs.max_depth is not None:
         amgs.max_depth+=1
+
+    if amgs.bootstrap=="True":
+        amgs.bootstrap=True
+        
+    else:
+        amgs.bootstrap=False
     
     
     main(amgs,Run.get_context())
