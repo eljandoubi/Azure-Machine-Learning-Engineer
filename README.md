@@ -37,17 +37,16 @@ Automated machine learning selects algorithms and hyperparameters, generating a 
 | featurization | auto | Automatic featurization |
 | debug_log | automl_errors.log | Debug log file |
 
-![AutoML Config](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/auto%20ml%20config.PNG)
-
 ### Results
-The best model, `VotingEnsemble`, achieved an AUC_weighted of **0.823**.
+The best model, `VotingEnsemble`, achieved an AUC_weighted of **0.840**.
+
+![Best AutoML Model](pics/auto_best_model.png)
 
 **Run Details**
-![AutoML Run Details](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/automl%20run%20details.PNG)
+![AutoML Run Completed](pics/auto_run_completed.png)
+![AutoML Run Details](pics/auto_run_details.png)
+![AutoML Run Table](pics/auto_run_table.png)
 
-**Best Model**
-![AutoML Best Model](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/automl%20best%20model.PNG)
-![AutoML Best Run](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/auto%20ml%20best%20run.PNG)
 
 ### Improve AutoML Results
 * Increase experiment timeout duration
@@ -106,7 +105,8 @@ The AutoML model outperforms the HyperDrive model, so it will be deployed as a w
 * **Test the resulting web service**
 
 **Healthy Deployed State**
-![AutoML Webservice](https://github.com/ObinnaIheanachor/Capstone-Project-Udacity-Machine-Learning-Engineer/blob/master/images/automl%20webservice.PNG)
+![AutoML Webservice stat](pics/deploy_stat.png)
+![AutoML Webservice ins](pics/deploy_ins.png)
 
 ## Screen Recording
 An overview of this project can be found [here](https://youtu.be).
